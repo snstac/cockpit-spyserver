@@ -55,7 +55,7 @@ jobs:
           deb=$(ls out/*.deb); echo "== $deb =="; dpkg-deb -c "$deb" | grep -E 'cockpit/spyserver|metainfo' | head
           dpkg-deb -I "$deb" | grep -E 'Package|Version|Depends|Architecture'
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: packages
           path: out/*
