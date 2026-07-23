@@ -1,0 +1,32 @@
+# nfpm config — builds both .deb and .rpm from the prebuilt dist/ tree.
+# Usage: VERSION=1.2.3 nfpm package -f nfpm.yaml -p deb -t out/
+#        VERSION=1.2.3 nfpm package -f nfpm.yaml -p rpm -t out/
+name: cockpit-spyserver
+arch: all
+platform: linux
+version: ${VERSION}
+release: "1"
+section: utils
+priority: optional
+maintainer: "Sensors & Signals LLC <oss@snstac.com>"
+vendor: "Sensors & Signals LLC"
+homepage: https://github.com/ampledata/cockpit-spyserver
+license: Apache-2.0
+description: |
+  Airspy SpyServer network sharing for onboard SDRs, for the Cockpit web console.
+  Adds a "SpyServer" page to Cockpit: list the RTL-SDR dongles, start/stop a
+  per-dongle SpyServer share, and copy the spyserver:// client URL for SDR#,
+  SDRangel or SDR++. Drives the AryaOS aryaos-sdr helper.
+
+depends:
+  - cockpit-bridge
+
+contents:
+  # Cockpit plugin (prebuilt, gzipped)
+  - src: ./dist/
+    dst: /usr/share/cockpit/spyserver
+    type: tree
+
+  # AppStream metainfo
+  - src: ./com.snstac.cockpit_spyserver.metainfo.xml
+    dst: /usr/share/metainfo/com.snstac.cockpit_spyserver.metainfo.xml
