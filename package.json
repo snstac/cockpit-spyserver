@@ -3,7 +3,7 @@
   "description": "Cockpit admin for Airspy SpyServer network sharing of onboard SDRs (AryaOS)",
   "type": "module",
   "main": "index.js",
-  "repository": "git@github.com:ampledata/cockpit-spyserver.git",
+  "repository": "git@github.com:snstac/cockpit-spyserver.git",
   "author": "Sensors & Signals LLC",
   "license": "Apache-2.0",
   "engines": {

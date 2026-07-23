@@ -15,8 +15,8 @@
   </description>
   <extends>org.cockpit_project.cockpit</extends>
   <launchable type="cockpit-manifest">spyserver</launchable>
-  <url type="homepage">https://github.com/ampledata/cockpit-spyserver</url>
-  <url type="bugtracker">https://github.com/ampledata/cockpit-spyserver/issues</url>
+  <url type="homepage">https://github.com/snstac/cockpit-spyserver</url>
+  <url type="bugtracker">https://github.com/snstac/cockpit-spyserver/issues</url>
   <developer id="com.snstac">
     <name>Sensors &amp; Signals LLC</name>
   </developer>

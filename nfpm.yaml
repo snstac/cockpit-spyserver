@@ -10,7 +10,7 @@ section: utils
 priority: optional
 maintainer: "Sensors & Signals LLC <oss@snstac.com>"
 vendor: "Sensors & Signals LLC"
-homepage: https://github.com/ampledata/cockpit-spyserver
+homepage: https://github.com/snstac/cockpit-spyserver
 license: Apache-2.0
 description: |
   Airspy SpyServer network sharing for onboard SDRs, for the Cockpit web console.
