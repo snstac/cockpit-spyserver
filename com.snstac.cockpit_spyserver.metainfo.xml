@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <id>com.snstac.cockpit_spyserver</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Apache-2.0</project_license>
+  <name>SpyServer</name>
+  <summary>Airspy SpyServer network sharing for onboard SDRs</summary>
+  <description>
+    <p>
+      Start and stop per-dongle Airspy SpyServer network shares for the RTL-SDR
+      radios on an AryaOS device, and copy the spyserver:// client URL for use
+      in SDR#, SDRangel or SDR++. The share server is unauthenticated and opt-in
+      (the firewall does not open its port by default).
+    </p>
+  </description>
+  <extends>org.cockpit_project.cockpit</extends>
+  <launchable type="cockpit-manifest">spyserver</launchable>
+  <url type="homepage">https://github.com/ampledata/cockpit-spyserver</url>
+  <url type="bugtracker">https://github.com/ampledata/cockpit-spyserver/issues</url>
+  <developer id="com.snstac">
+    <name>Sensors &amp; Signals LLC</name>
+  </developer>
+</component>

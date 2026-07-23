@@ -1,11 +1,17 @@
 {
     "requires": {
-        "cockpit": "137"
+        "cockpit": "320"
     },
 
-    "tools": {
+    "menu": {
         "index": {
-            "label": "Starter Kit"
+            "label": "SpyServer",
+            "order": 102,
+            "keywords": [
+                {
+                    "matches": ["spyserver", "spy server", "airspy", "sdr", "rtl-sdr", "rtlsdr", "sdr sharing", "remote sdr", "sdr#", "sdrangel", "sdr++", "iq stream"]
+                }
+            ]
         }
     }
 }

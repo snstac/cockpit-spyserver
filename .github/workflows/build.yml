@@ -1,0 +1,67 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write   # upload assets to releases on tags
+
+jobs:
+  packages:
+    name: Build plugin + deb/rpm packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build the Cockpit plugin
+        run: make
+        env:
+          NODE_ENV: production
+
+      - name: Install nfpm
+        run: |
+          NFPM_VERSION=2.41.3
+          curl -sSfL "https://github.com/goreleaser/nfpm/releases/download/v${NFPM_VERSION}/nfpm_${NFPM_VERSION}_amd64.deb" -o /tmp/nfpm.deb
+          sudo dpkg -i /tmp/nfpm.deb
+
+      - name: Determine version
+        id: ver
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=0.0.0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build deb + rpm
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+        run: |
+          mkdir -p out
+          nfpm package -f nfpm.yaml -p deb -t out/
+          nfpm package -f nfpm.yaml -p rpm -t out/
+          ls -l out/
+
+      - name: Sanity-check package contents
+        run: |
+          deb=$(ls out/*.deb); echo "== $deb =="; dpkg-deb -c "$deb" | grep -E 'cockpit/spyserver|metainfo' | head
+          dpkg-deb -I "$deb" | grep -E 'Package|Version|Depends|Architecture'
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: out/*
+
+      - name: Attach packages to release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${GITHUB_REF_NAME}" out/*.deb out/*.rpm --clobber

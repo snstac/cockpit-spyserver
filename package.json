@@ -1,11 +1,11 @@
 {
-  "name": "starter-kit",
-  "description": "Scaffolding for a cockpit module",
+  "name": "spyserver",
+  "description": "Cockpit admin for Airspy SpyServer network sharing of onboard SDRs (AryaOS)",
   "type": "module",
   "main": "index.js",
-  "repository": "git@github.com:cockpit/starter-kit.git",
-  "author": "",
-  "license": "LGPL-2.1",
+  "repository": "git@github.com:ampledata/cockpit-spyserver.git",
+  "author": "Sensors & Signals LLC",
+  "license": "Apache-2.0",
   "engines": {
     "node": ">= 16"
   },
