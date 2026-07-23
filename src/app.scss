@@ -1,5 +1,123 @@
 @use "page.scss";
 
-p {
-    font-weight: bold;
+/* AryaOS operations console theme, shared across Cockpit sensor plugins. */
+:root {
+    color-scheme: dark;
+    --aos-bg: #071211;
+    --aos-panel: #122322;
+    --aos-panel-2: #172c2a;
+    --aos-ink: #edf7f4;
+    --aos-muted: #9bb2ad;
+    --aos-border: rgb(124 170 160 / 28%);
+    --aos-border-strong: rgb(124 170 160 / 40%);
+    --aos-accent: #35a58f;
+    --aos-accent-dark: #6ed4be;
+    --aos-accent-ink: #071211;
+    --aos-danger: #ff8a7a;
+    --aos-ok: #74d8a4;
+
+    // Repoint the PF6 tokens this plugin consumes at the AOS palette so
+    // token-based components (Label, DescriptionList, Gallery) follow.
+    --pf-t--global--text--color--regular: var(--aos-ink);
+    --pf-t--global--text--color--subtle: var(--aos-muted);
+    --pf-t--global--border--color--default: var(--aos-border);
+    --pf-t--global--background--color--primary--default: var(--aos-panel);
+    --pf-t--global--background--color--secondary--default: var(--aos-panel-2);
+    --pf-t--global--color--brand--default: var(--aos-accent);
+}
+
+// Cockpit sets `body { overflow-block: hidden }` and expects each plugin to
+// provide its own scroll container.
+html,
+body,
+#app {
+    block-size: 100%;
+}
+
+body {
+    background: var(--aos-bg);
+    color: var(--aos-ink);
+    font-family: RedHatText, "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+.ss-page {
+    block-size: 100%;
+    overflow-y: auto;
+    padding: clamp(0.75rem, 2vw, 1.5rem);
+    background:
+        linear-gradient(180deg, rgb(53 165 143 / 16%), rgb(7 18 17 / 0%) 18rem),
+        var(--aos-bg);
+}
+
+.pf-v6-c-card,
+.pf-c-card {
+    background: var(--aos-panel);
+    color: var(--aos-ink);
+    border: 1px solid var(--aos-border);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 32%);
+}
+
+.pf-v6-c-card__title,
+.pf-c-card__title {
+    color: var(--aos-ink);
+    font-size: 1.1rem;
+    line-height: 1.3;
+}
+
+/* Touch targets sized for gloved field use (>=48px on all controls). */
+.pf-v6-c-button,
+.pf-c-button,
+button {
+    min-height: 3rem;
+    padding-inline: 1.2rem;
+    border-radius: 5px;
+    font-weight: 650;
+}
+
+.pf-v6-c-button.pf-m-primary,
+.pf-c-button.pf-m-primary {
+    border-color: var(--aos-accent);
+    background-color: var(--aos-accent) !important;
+    color: var(--aos-accent-ink) !important;
+}
+
+.pf-v6-c-button.pf-m-secondary,
+.pf-c-button.pf-m-secondary {
+    border-color: var(--aos-accent);
+    background-color: var(--aos-panel-2) !important;
+    color: var(--aos-accent-dark) !important;
+}
+
+.ss-sub {
+    color: var(--pf-t--global--text--color--subtle, #6a6e73);
+    font-size: var(--pf-t--global--font--size--sm, 0.875rem);
+}
+
+.ss-mono {
+    font-family: var(--pf-t--global--font--family--mono, monospace);
+    font-size: var(--pf-t--global--font--size--sm, 0.875rem);
+    word-break: break-all;
+    user-select: all;
+}
+
+.ss-alert {
+    margin-block-start: 8px;
+}
+
+.ss-actions {
+    margin-block-start: 12px;
+}
+
+@media (width <= 760px) {
+    .pf-v6-l-flex,
+    .pf-c-form__actions {
+        flex-wrap: wrap;
+    }
+
+    .pf-v6-c-button,
+    .pf-c-button,
+    button {
+        flex: 1 1 12rem;
+    }
 }

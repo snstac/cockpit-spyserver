@@ -1,6 +1,15 @@
-# Cockpit Starter Kit
+# Cockpit SpyServer
 
-Scaffolding for a [Cockpit](https://cockpit-project.org/) module.
+A [Cockpit](https://cockpit-project.org/) admin page for **Airspy SpyServer**
+network sharing of onboard SDRs, built for [AryaOS](https://github.com/snstac/aryaos).
+
+SpyServer streams a compressed/decimated RTL-SDR over TCP so a remote client
+(SDR#, SDRangel, SDR++) can tune it via `spyserver://<host>:<port>`. This plugin
+lists the detected RTL-SDR dongles and lets an operator start/stop a per-dongle
+SpyServer share, showing the client URL for each. It drives the AryaOS
+`aryaos-sdr` helper (`list`, `share-status`, `share <index> spyserver|off`); the
+share server is **unauthenticated and opt-in** (the firewall does not open its
+port by default — use it on a trusted or VPN network only).
 
 # Development dependencies
 
